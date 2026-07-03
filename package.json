@@ -1,0 +1,36 @@
+{
+  "name": "terraform-lite",
+  "version": "0.1.0",
+  "description": "A declarative infrastructure provisioning engine inspired by Terraform",
+  "main": "dist/index.js",
+  "bin": {
+    "tf-lite": "dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli/index.js",
+    "dev": "ts-node src/cli/index.ts",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "terraform",
+    "infrastructure",
+    "declarative",
+    "provisioning",
+    "iac"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "sql.js": "^1.8.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}

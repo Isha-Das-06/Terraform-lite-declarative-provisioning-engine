@@ -1,0 +1,44 @@
+{
+  "resource": {
+    "docker_network": {
+      "app_network": {
+        "type": "network",
+        "name": "app_network",
+        "driver": "bridge",
+        "subnet": "172.20.0.0/16"
+      }
+    },
+    "docker_image": {
+      "node_base": {
+        "type": "image",
+        "name": "node",
+        "tag": "18-alpine"
+      },
+      "postgres_base": {
+        "type": "image",
+        "name": "postgres",
+        "tag": "15-alpine"
+      }
+    },
+    "docker_container": {
+      "app_server": {
+        "type": "container",
+        "name": "app_server",
+        "image": "node:18-alpine",
+        "ports": ["3000:3000"],
+        "env": ["NODE_ENV=production", "PORT=3000"],
+        "memory": 512,
+        "depends_on": ["docker_network.app_network"]
+      },
+      "postgres_db": {
+        "type": "container",
+        "name": "postgres_db",
+        "image": "postgres:15-alpine",
+        "ports": ["5432:5432"],
+        "env": ["POSTGRES_PASSWORD=password123"],
+        "memory": 1024,
+        "depends_on": ["docker_network.app_network"]
+      }
+    }
+  }
+}
