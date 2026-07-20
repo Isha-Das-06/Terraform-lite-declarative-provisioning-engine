@@ -1,0 +1,72 @@
+{
+  "resource": {
+    "sqlite_database": {
+      "main_db": {
+        "type": "database",
+        "path": "./app.db"
+      }
+    },
+    "sqlite_table": {
+      "users_table": {
+        "type": "table",
+        "name": "users",
+        "database_id": "sqlite_database.main_db",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "constraints": ["PRIMARY KEY", "AUTOINCREMENT"]
+          },
+          {
+            "name": "email",
+            "type": "TEXT",
+            "constraints": ["UNIQUE", "NOT NULL"]
+          },
+          {
+            "name": "username",
+            "type": "TEXT",
+            "constraints": ["NOT NULL"]
+          },
+          {
+            "name": "created_at",
+            "type": "TIMESTAMP",
+            "constraints": ["DEFAULT CURRENT_TIMESTAMP"]
+          }
+        ],
+        "depends_on": ["sqlite_database.main_db"]
+      },
+      "posts_table": {
+        "type": "table",
+        "name": "posts",
+        "database_id": "sqlite_database.main_db",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "constraints": ["PRIMARY KEY", "AUTOINCREMENT"]
+          },
+          {
+            "name": "title",
+            "type": "TEXT",
+            "constraints": ["NOT NULL"]
+          },
+          {
+            "name": "content",
+            "type": "TEXT"
+          },
+          {
+            "name": "user_id",
+            "type": "INTEGER",
+            "constraints": ["NOT NULL"]
+          },
+          {
+            "name": "created_at",
+            "type": "TIMESTAMP",
+            "constraints": ["DEFAULT CURRENT_TIMESTAMP"]
+          }
+        ],
+        "depends_on": ["sqlite_database.main_db", "sqlite_table.users_table"]
+      }
+    }
+  }
+}

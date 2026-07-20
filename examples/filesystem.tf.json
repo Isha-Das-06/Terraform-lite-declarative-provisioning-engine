@@ -1,0 +1,30 @@
+{
+  "resource": {
+    "directory": {
+      "data_dir": {"type": "directory", "path": "./data"},
+      "config_dir": {"type": "directory", "path": "./config"}
+    },
+    "file": {
+      "app_config": {
+        "type": "file",
+        "path": "./config/app.json",
+        "content": "{\"app_name\": \"terraform-lite\", \"version\": \"0.1.0\", \"debug\": false}",
+        "depends_on": ["directory.config_dir"]
+      },
+      "readme_file": {
+        "type": "file",
+        "path": "./README.md",
+        "content": "# My Terraform Lite Project\n\nManaged by Terraform-Lite."
+      }
+    },
+    "template": {
+      "env_template": {
+        "type": "template",
+        "path": "./config/.env",
+        "template": "APP_NAME=${app_name}\nDEBUG=${debug}\nPORT=${port}",
+        "variables": {"app_name": "terraform-lite", "debug": "true", "port": "3000"},
+        "depends_on": ["directory.config_dir"]
+      }
+    }
+  }
+}
